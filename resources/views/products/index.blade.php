@@ -27,12 +27,22 @@
             <td>{{ $value }}</td>
           @endif
           @endforeach
+
+          {{-- bottone che porta alla vista del singolo prodotto --}}
           <td>
             <a class="btn btn-secondary btn-lg" href="{{ route($destinationRouteShow, [$paramName => $item["id"]] ) }}">
               <i class="fas fa-eye"></i>
             </a>
           </td>
-          <td><a class="btn btn-secondary btn-lg" href="{{ route($destinationRouteEdit, [$paramName => $item["id"]]) }}"><i class="fas fa-pencil-alt"></i></a></td>
+          
+          {{-- bottone che porta alla vista della modifica singolo prodotto --}}
+          <td>
+            <a class="btn btn-secondary btn-lg" href="{{ route($destinationRouteEdit, [$paramName => $item["id"]]) }}">
+              <i class="fas fa-pencil-alt"></i>
+            </a>
+          </td>
+
+          {{-- bottone per cancellare il prodotto --}}
           <td>
             <form action="{{ route($destinationRouteDestroy, [$paramName => $item["id"]]) }}" method="post">
               @csrf
