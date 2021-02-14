@@ -15,7 +15,7 @@ class BookController extends Controller
     public function index()
     {
       $items = Book::all();
-      
+
       return view("products.index", compact("items"));
     }
 
@@ -48,7 +48,9 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+      $item = Book::findOrFail($id);
+
+      return view("products.show", compact("item"));
     }
 
     /**

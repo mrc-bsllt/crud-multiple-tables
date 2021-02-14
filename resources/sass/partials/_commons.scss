@@ -7,3 +7,15 @@ header {
     line-height: $headerHeight;
   }
 }
+
+.no_style_list {
+  list-style: none;
+
+  li {
+    font-size: 30px;
+
+    strong {
+      text-transform: uppercase;
+    }
+  }
+}

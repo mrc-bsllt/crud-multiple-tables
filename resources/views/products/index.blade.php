@@ -27,6 +27,11 @@
             <td>{{ $value }}</td>
           @endif
           @endforeach
+          <td><a class="btn btn-secondary btn-lg" href="{{
+            Route::currentRouteName() == 'books.index' ? route("books.show", ["book" => $item["id"]]) : route("shoes.show", ["shoe" => $item["id"]])
+          }}">
+            <i class="fas fa-eye"></i>
+          </a></td>
         </tr>
       @endforeach
     </tbody>
