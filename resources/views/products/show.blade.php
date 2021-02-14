@@ -25,4 +25,6 @@
       @endforeach
     </ul>
   </div>
+
+  <a class="btn btn-secondary btn-lg mt-2" href="{{ route($destinationRouteIndex) }}">Indietro</a>
 @endsection

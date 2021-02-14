@@ -7,6 +7,9 @@ use App\Book;
 
 class BookController extends Controller
 {
+    private $destinationRouteShow = "books.show";
+    private $destinationRouteIndex = "shoes.index";
+    private $paramName = "book";
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +18,10 @@ class BookController extends Controller
     public function index()
     {
       $items = Book::all();
+      $destinationRouteShow = $this->destinationRouteShow;
+      $paramName = $this->paramName;
 
-      return view("products.index", compact("items"));
+      return view("products.index", compact("items", "destinationRouteShow", "paramName"));
     }
 
     /**
@@ -49,8 +54,9 @@ class BookController extends Controller
     public function show($id)
     {
       $item = Book::findOrFail($id);
+      $destinationRouteIndex = $this->destinationRouteIndex;
 
-      return view("products.show", compact("item"));
+      return view("products.show", compact("item", "destinationRouteIndex"));
     }
 
     /**

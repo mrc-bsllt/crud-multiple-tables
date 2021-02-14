@@ -7,6 +7,10 @@ use App\Shoe;
 
 class ShoeController extends Controller
 {
+    private $destinationRouteShow = "shoes.show";
+    private $destinationRouteIndex = "shoes.index";
+    private $paramName = "shoe";
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +19,11 @@ class ShoeController extends Controller
     public function index()
     {
       $items = Shoe::all();
+      $destinationRouteShow = $this->destinationRouteShow;
+      $paramName = $this->paramName;
 
-      return view("products.index", compact("items"));
+      return view("products.index", compact("items", "destinationRouteShow", "paramName"));
+
     }
 
     /**
@@ -49,8 +56,9 @@ class ShoeController extends Controller
     public function show($id)
     {
       $item = Shoe::findOrFail($id);
+      $destinationRouteIndex = $this->destinationRouteIndex;
 
-      return view("products.show", compact("item"));
+      return view("products.show", compact("item", "destinationRouteIndex"));
     }
 
     /**
