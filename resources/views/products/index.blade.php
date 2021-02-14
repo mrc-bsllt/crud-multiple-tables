@@ -39,5 +39,6 @@
 
   <div class="buttons">
     <a class="btn btn-secondary btn-lg" href="{{ route("home") }}">Indietro</a>
+    <a class="btn btn-secondary btn-lg" href="{{ route($destinationRouteCreate) }}"><i class="fas fa-plus"></i></a>
   </div>
 @endsection

@@ -9,6 +9,7 @@ class ShoeController extends Controller
 {
     private $destinationRouteShow = "shoes.show";
     private $destinationRouteIndex = "shoes.index";
+    private $destinationRouteCreate = "shoes.create";
     private $paramName = "shoe";
 
     /**
@@ -20,9 +21,10 @@ class ShoeController extends Controller
     {
       $items = Shoe::all();
       $destinationRouteShow = $this->destinationRouteShow;
+      $destinationRouteCreate = $this->destinationRouteCreate;
       $paramName = $this->paramName;
 
-      return view("products.index", compact("items", "destinationRouteShow", "paramName"));
+      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "paramName"));
 
     }
 
@@ -33,7 +35,7 @@ class ShoeController extends Controller
      */
     public function create()
     {
-        //
+      return view("products.create-shoes");
     }
 
     /**
@@ -44,7 +46,14 @@ class ShoeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = $request->all();
+
+      $newItem = new Shoe();
+      $newItem->fill($data);
+
+      $newItem->save();
+
+      return redirect()->route("shoes.index");
     }
 
     /**

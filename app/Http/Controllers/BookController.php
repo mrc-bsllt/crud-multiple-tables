@@ -8,7 +8,8 @@ use App\Book;
 class BookController extends Controller
 {
     private $destinationRouteShow = "books.show";
-    private $destinationRouteIndex = "shoes.index";
+    private $destinationRouteIndex = "books.index";
+    private $destinationRouteCreate = "books.create";
     private $paramName = "book";
     /**
      * Display a listing of the resource.
@@ -19,9 +20,10 @@ class BookController extends Controller
     {
       $items = Book::all();
       $destinationRouteShow = $this->destinationRouteShow;
+      $destinationRouteCreate = $this->destinationRouteCreate;
       $paramName = $this->paramName;
 
-      return view("products.index", compact("items", "destinationRouteShow", "paramName"));
+      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "paramName"));
     }
 
     /**
@@ -31,7 +33,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+      return view("products.create-books");
     }
 
     /**
@@ -42,7 +44,15 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = $request->all();
+
+      $newItem = new Book();
+      $newItem->fill($data);
+      
+      $newItem->save();
+
+      return redirect()->route("books.index");
+
     }
 
     /**
