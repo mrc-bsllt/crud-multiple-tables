@@ -11,6 +11,7 @@ class ShoeController extends Controller
     private $destinationRouteIndex = "shoes.index";
     private $destinationRouteCreate = "shoes.create";
     private $destinationRouteEdit = "shoes.edit";
+    private $destinationRouteDestroy = "shoes.destroy";
     private $paramName = "shoe";
 
     /**
@@ -24,9 +25,10 @@ class ShoeController extends Controller
       $destinationRouteShow = $this->destinationRouteShow;
       $destinationRouteCreate = $this->destinationRouteCreate;
       $destinationRouteEdit = $this->destinationRouteEdit;
+      $destinationRouteDestroy = $this->destinationRouteDestroy;
       $paramName = $this->paramName;
 
-      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "destinationRouteEdit", "paramName"));
+      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "destinationRouteEdit", "destinationRouteDestroy", "paramName"));
 
     }
 
@@ -113,6 +115,11 @@ class ShoeController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $item = Shoe::findOrFail($id);
+
+      $item->delete();
+
+      return redirect()->route("shoes.index");
+
     }
 }

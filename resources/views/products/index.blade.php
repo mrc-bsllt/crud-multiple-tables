@@ -33,6 +33,14 @@
             </a>
           </td>
           <td><a class="btn btn-secondary btn-lg" href="{{ route($destinationRouteEdit, [$paramName => $item["id"]]) }}"><i class="fas fa-pencil-alt"></i></a></td>
+          <td>
+            <form action="{{ route($destinationRouteDestroy, [$paramName => $item["id"]]) }}" method="post">
+              @csrf
+              @method("DELETE")
+
+              <button class="btn btn-secondary btn-lg" type="submit" name="button"><i class="fas fa-trash-alt"></i></button>
+            </form>
+        </td>
         </tr>
       @endforeach
     </tbody>

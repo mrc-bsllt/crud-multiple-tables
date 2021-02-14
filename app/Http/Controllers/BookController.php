@@ -11,6 +11,7 @@ class BookController extends Controller
     private $destinationRouteIndex = "books.index";
     private $destinationRouteCreate = "books.create";
     private $destinationRouteEdit = "books.edit";
+    private $destinationRouteDestroy = "books.destroy";
     private $paramName = "book";
     /**
      * Display a listing of the resource.
@@ -23,9 +24,10 @@ class BookController extends Controller
       $destinationRouteShow = $this->destinationRouteShow;
       $destinationRouteCreate = $this->destinationRouteCreate;
       $destinationRouteEdit = $this->destinationRouteEdit;
+      $destinationRouteDestroy = $this->destinationRouteDestroy;
       $paramName = $this->paramName;
 
-      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "destinationRouteEdit", "paramName"));
+      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "destinationRouteEdit", "destinationRouteDestroy", "paramName"));
     }
 
     /**
@@ -110,6 +112,10 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $item = Book::findOrFail($id);
+
+      $item->delete();
+
+      return redirect()->route("books.index");
     }
 }
