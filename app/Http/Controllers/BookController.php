@@ -10,6 +10,7 @@ class BookController extends Controller
     private $destinationRouteShow = "books.show";
     private $destinationRouteIndex = "books.index";
     private $destinationRouteCreate = "books.create";
+    private $destinationRouteEdit = "books.edit";
     private $paramName = "book";
     /**
      * Display a listing of the resource.
@@ -21,9 +22,10 @@ class BookController extends Controller
       $items = Book::all();
       $destinationRouteShow = $this->destinationRouteShow;
       $destinationRouteCreate = $this->destinationRouteCreate;
+      $destinationRouteEdit = $this->destinationRouteEdit;
       $paramName = $this->paramName;
 
-      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "paramName"));
+      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "destinationRouteEdit", "paramName"));
     }
 
     /**
@@ -48,7 +50,7 @@ class BookController extends Controller
 
       $newItem = new Book();
       $newItem->fill($data);
-      
+
       $newItem->save();
 
       return redirect()->route("books.index");
@@ -77,7 +79,9 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+      $item = Book::findOrFail($id);
+
+      return view("products.edit-books", compact("item"));
     }
 
     /**
@@ -89,7 +93,13 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $data = $request->all();
+
+      $newItem = Book::findOrFail($id);
+
+      $newItem->update($data);
+
+      return redirect()->route("books.index");
     }
 
     /**

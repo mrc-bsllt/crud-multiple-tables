@@ -10,6 +10,7 @@ class ShoeController extends Controller
     private $destinationRouteShow = "shoes.show";
     private $destinationRouteIndex = "shoes.index";
     private $destinationRouteCreate = "shoes.create";
+    private $destinationRouteEdit = "shoes.edit";
     private $paramName = "shoe";
 
     /**
@@ -22,9 +23,10 @@ class ShoeController extends Controller
       $items = Shoe::all();
       $destinationRouteShow = $this->destinationRouteShow;
       $destinationRouteCreate = $this->destinationRouteCreate;
+      $destinationRouteEdit = $this->destinationRouteEdit;
       $paramName = $this->paramName;
 
-      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "paramName"));
+      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "destinationRouteEdit", "paramName"));
 
     }
 
@@ -78,7 +80,10 @@ class ShoeController extends Controller
      */
     public function edit($id)
     {
-        //
+      $item = Shoe::findOrFail($id);
+
+      return view("products.edit-shoes", compact("item"));
+
     }
 
     /**
@@ -90,7 +95,14 @@ class ShoeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $data = $request->all();
+
+      $newItem = Shoe::findOrFail($id);
+
+      $newItem->update($data);
+
+      return redirect()->route("shoes.index");
+
     }
 
     /**

@@ -32,6 +32,7 @@
               <i class="fas fa-eye"></i>
             </a>
           </td>
+          <td><a class="btn btn-secondary btn-lg" href="{{ route($destinationRouteEdit, [$paramName => $item["id"]]) }}"><i class="fas fa-pencil-alt"></i></a></td>
         </tr>
       @endforeach
     </tbody>
