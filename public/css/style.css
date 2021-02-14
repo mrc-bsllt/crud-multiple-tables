@@ -1,0 +1,8 @@
+header {
+  height: 80px;
+  background-color: #121212;
+  color: #c1c1c1;
+}
+header h1 {
+  line-height: 80px;
+}

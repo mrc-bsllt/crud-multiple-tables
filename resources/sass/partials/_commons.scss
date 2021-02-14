@@ -1,0 +1,9 @@
+header {
+  height: $headerHeight;
+  background-color: $mainColorBg;
+  color: $mainColorFont;
+
+  h1 {
+    line-height: $headerHeight;
+  }
+}
