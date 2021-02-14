@@ -31,4 +31,8 @@
       @endforeach
     </tbody>
   </table>
+
+  <div class="buttons">
+    <a class="btn btn-secondary btn-lg" href="{{ route("home") }}">Indietro</a>
+  </div>
 @endsection
