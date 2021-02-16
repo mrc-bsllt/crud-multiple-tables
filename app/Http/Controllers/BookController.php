@@ -27,7 +27,14 @@ class BookController extends Controller
       $destinationRouteDestroy = $this->destinationRouteDestroy;
       $paramName = $this->paramName;
 
-      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "destinationRouteEdit", "destinationRouteDestroy", "paramName"));
+      return view("products.index", compact(
+        "items",
+        "destinationRouteShow",
+        "destinationRouteCreate",
+        "destinationRouteEdit",
+        "destinationRouteDestroy",
+        "paramName"
+      ));
     }
 
     /**
@@ -51,9 +58,7 @@ class BookController extends Controller
       $data = $request->all();
 
       $newItem = new Book();
-      $newItem->fill($data);
-
-      $newItem->save();
+      $newItem->fill($data)->save();
 
       return redirect()->route("books.index");
 
@@ -65,9 +70,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Book $book)
     {
-      $item = Book::findOrFail($id);
+      $item = $book;
       $destinationRouteIndex = $this->destinationRouteIndex;
 
       return view("products.show", compact("item", "destinationRouteIndex"));
@@ -79,9 +84,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Book $book)
     {
-      $item = Book::findOrFail($id);
+      $item = $book;
 
       return view("products.edit-books", compact("item"));
     }
@@ -93,13 +98,13 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
       $data = $request->all();
 
-      $newItem = Book::findOrFail($id);
+      //$newItem = Book::findOrFail($id);
 
-      $newItem->update($data);
+      $book->update($data);
 
       return redirect()->route("books.index");
     }
@@ -110,9 +115,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-      $item = Book::findOrFail($id);
+      $item = $book;
 
       $item->delete();
 

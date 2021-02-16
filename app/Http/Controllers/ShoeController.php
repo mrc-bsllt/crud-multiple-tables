@@ -28,7 +28,14 @@ class ShoeController extends Controller
       $destinationRouteDestroy = $this->destinationRouteDestroy;
       $paramName = $this->paramName;
 
-      return view("products.index", compact("items", "destinationRouteShow", "destinationRouteCreate", "destinationRouteEdit", "destinationRouteDestroy", "paramName"));
+      return view("products.index", compact(
+        "items",
+        "destinationRouteShow",
+        "destinationRouteCreate",
+        "destinationRouteEdit",
+        "destinationRouteDestroy",
+        "paramName"
+      ));
 
     }
 
@@ -53,9 +60,7 @@ class ShoeController extends Controller
       $data = $request->all();
 
       $newItem = new Shoe();
-      $newItem->fill($data);
-
-      $newItem->save();
+      $newItem->fill($data)->save();
 
       return redirect()->route("shoes.index");
     }
@@ -66,9 +71,9 @@ class ShoeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Shoe $shoe)
     {
-      $item = Shoe::findOrFail($id);
+      $item = $shoe;
       $destinationRouteIndex = $this->destinationRouteIndex;
 
       return view("products.show", compact("item", "destinationRouteIndex"));
@@ -80,9 +85,9 @@ class ShoeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Shoe $shoe)
     {
-      $item = Shoe::findOrFail($id);
+      $item = $shoe;
 
       return view("products.edit-shoes", compact("item"));
 
@@ -95,11 +100,11 @@ class ShoeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Shoe $shoe)
     {
       $data = $request->all();
 
-      $newItem = Shoe::findOrFail($id);
+      $newItem = $shoe;
 
       $newItem->update($data);
 
@@ -113,9 +118,9 @@ class ShoeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Shoe $shoe)
     {
-      $item = Shoe::findOrFail($id);
+      $item = $shoe;
 
       $item->delete();
 
